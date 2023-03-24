@@ -17,7 +17,7 @@ def read_yaml(file_name):
 def write_cookies():
     driver = webdriver.Chrome()
     driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu')
-    sleep(60)
+    sleep(40)
     cookies = driver.get_cookies()
     write_yaml(r'./cookies.yaml', cookies)
 
@@ -34,5 +34,5 @@ def use_cookies():
 
 
 if __name__ == '__main__':
-    # write_cookies()
-    use_cookies()
+    write_cookies()
+    # use_cookies()

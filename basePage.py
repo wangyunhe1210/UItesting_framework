@@ -9,7 +9,7 @@ class BasePage:
         self.login_url = 'https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu'
         self.base_url = 'https://work.weixin.qq.com/wework_admin/frame'
 
-    def __login(self):
+    def login(self):
         self.driver.get(self.login_url)
         for cookie in read_yaml(r'./cookies.yaml'):
             self.driver.add_cookie(cookie)
@@ -20,3 +20,4 @@ class BasePage:
 
 if __name__ == '__main__':
     page = BasePage()
+    page.login()

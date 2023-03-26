@@ -1,12 +1,22 @@
 from selenium import webdriver
-
+from config.base_config import cookies_url, base_url, implicitly_time_out
+from utils.handle_yaml import read_yaml
 # chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 class Driver:
     _driver = None
 
     @classmethod
-    def driver_handle(cls, browser='chrome'):
+    def __login(cls):
+        cls._driver.get(cookies_url)
+        for cookie in read_yaml(r'./cookies.yaml'):
+            cls._driver.add_cookie(cookie)
+        cls._driver.get(base_url)
+
+        return cls._driver
+
+    @classmethod
+    def get_driver(cls, browser='chrome'):
         if cls._driver is None:
             if browser == 'chrome':
                 opt = webdriver.ChromeOptions()
@@ -16,5 +26,8 @@ class Driver:
                 cls._driver = webdriver.Firefox()
             else:
                 raise '无此浏览器'
+        cls._driver.implicitly_wait(implicitly_time_out)
+        cls.__login()
+        cls._driver.maximize_window()
 
         return cls._driver

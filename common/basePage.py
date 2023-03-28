@@ -1,10 +1,11 @@
 from selenium import webdriver
-from driver import Driver
+from common.driver import Driver
 from utils.handle_yaml import read_yaml
 from config.base_config import cookies_url, base_url
 from config.base_config import time_out, poll_frequency
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
+
 
 class BasePage:
     def __init__(self):
@@ -24,7 +25,3 @@ class BasePage:
 
         return self.driver.find_element(*locator)
 
-
-
-if __name__ == '__main__':
-    page = BasePage()

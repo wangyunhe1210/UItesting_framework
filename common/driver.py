@@ -1,6 +1,9 @@
 from selenium import webdriver
 from config.base_config import cookies_url, base_url, implicitly_time_out
 from utils.handle_yaml import read_yaml
+from config.file_path import cookie_path
+
+
 # chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 class Driver:
@@ -9,7 +12,7 @@ class Driver:
     @classmethod
     def __login(cls):
         cls._driver.get(cookies_url)
-        for cookie in read_yaml(r'./cookies.yaml'):
+        for cookie in read_yaml(cookie_path):
             cls._driver.add_cookie(cookie)
         cls._driver.get(base_url)
 
